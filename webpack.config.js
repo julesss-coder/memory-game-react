@@ -18,7 +18,7 @@ module.exports = {
     static: {
       directory: path.resolve(__dirname, 'dist'),
     },
-    port: 3000,
+    port: 3001, // Changed port because json-server runs on port 3000
     open: true,
     hot: true,
     compress: true,
@@ -43,6 +43,16 @@ module.exports = {
             "presets": ["@babel/preset-env", "@babel/preset-react"]
           }
         }
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,

@@ -1,7 +1,7 @@
 import React from "react";
+import TripList from "./components/TripList.jsx";
 
 const Header = ({testProp, id}) => {
-  console.log(testProp, id)
   return (
     <header>
       <h1>Header</h1>
@@ -10,14 +10,10 @@ const Header = ({testProp, id}) => {
 }
 
 const App = () => {
-
-  const element = <h1 className="headline">headline</h1>;
-  console.log(element);
-  console.log("Header: ", <Header testProp="test" id={0}/>);
-
   return (
     <>
       <Header testProp="test" id={0}/>
+      <TripList />
       <p>Hello, earthside humans!</p>
     </>
   )
