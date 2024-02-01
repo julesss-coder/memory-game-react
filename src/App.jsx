@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import TripList from "./components/TripList.jsx";
 
 const Header = ({testProp, id}) => {
@@ -10,10 +11,16 @@ const Header = ({testProp, id}) => {
 }
 
 const App = () => {
+  const [showTrips, setShowTrips] = useState(true);
+
   return (
     <>
       <Header testProp="test" id={0}/>
-      <TripList />
+      <button onClick={() => setShowTrips(false)}>Hide trips</button>
+      {
+        showTrips && <TripList />
+      }
+      
       <p>Hello, earthside humans!</p>
     </>
   )
