@@ -1,29 +1,30 @@
 import React from "react";
-import { useState } from "react";
-import TripList from "./components/TripList.jsx";
 
-const Header = ({testProp, id}) => {
-  return (
-    <header>
-      <h1>Header</h1>
-    </header>
-  )
-}
+const imagesContext = require.context('../public/assets', false, /\.(png|jpe?g|svg)$/);
+const cardImages = imagesContext.keys().map(imagesContext);
 
 const App = () => {
-  const [showTrips, setShowTrips] = useState(true);
+  console.log(cardImages)
+  const cards = [...cardImages, ...cardImages];
+  console.log(cards)
 
+  // TODO Add one more image
+  // TODO Randomize order of cards
+  const cardImgs = cards.map((card, index) => {
+    return (
+      <img src={card} key={index} className="memory-image"/>
+    );
+  });
+  
   return (
-    <>
-      <Header testProp="test" id={0}/>
-      <button onClick={() => setShowTrips(false)}>Hide trips</button>
-      {
-        showTrips && <TripList />
-      }
-      
-      <p>Hello, earthside humans!</p>
-    </>
-  )
+    <div className="App">
+      <h1 className="memory-game-headline">Memory Game</h1>
+      <button className="new-game-btn">New Game</button>
+      <div className="memory-board">
+        {cardImgs}
+      </div>
+    </div>
+  );
 };
 
 export default App;

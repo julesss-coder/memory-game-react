@@ -62,7 +62,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Don\'t Laugh Challenge',
+      title: 'Memory Game',
       filename: 'index.html',
       template: 'public/template.html'
     }),
