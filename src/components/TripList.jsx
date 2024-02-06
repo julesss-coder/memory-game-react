@@ -5,7 +5,7 @@ import './TripList.scss';
 
 const TripList = () => {
   const [url, setUrl] = useState('http://localhost:3000/trips');
-  const { data: trips, pending, error } = useFetch(url);
+  const { data: trips, pending, error } = useFetch(url, {type: "GET"});
 
   console.log("TripList renders");
 
