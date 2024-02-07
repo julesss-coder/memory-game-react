@@ -1,25 +1,9 @@
 import React from "react";
 import { useState } from "react";
+import Card from "./components/Card.jsx";
 
 const imagesContext = require.context('../public/assets/cardFronts', false, /\.(png|jpe?g|svg)$/);
 const cardImages = imagesContext.keys().map(imagesContext);
-const imagesContextCover = require.context('../public/assets', false, /\.(png|jpe?g|svg)$/);
-const coverImg = imagesContextCover.keys().map(imagesContextCover);
-
-const Card = ({card, handleCardClick}) => {
-  const { src, id, turned } = card;
-
-  return (
-    <div className="card">
-      {
-        turned ? 
-          <img src={src} className="front" key={id}/>
-          : 
-          <img src={coverImg} alt="cover image" className="cover" key={id} onClick={() => handleCardClick(id)} />
-      }
-  </div>
-  );
-};
 
 const App = () => {
   const [currentCards, setCurrentCards] = useState([]);
@@ -28,11 +12,21 @@ const App = () => {
   const handleCardClick = (key) => {
     console.log("handleCardClick() runs", key);
 
+    // If 2 cards are turned, turn them face-down again before turning the clicked card face-up
+    if (turns > 1) {
+      const turnedCards = [...currentCards];
+      turnedCards.forEach(card => card.turned = false);
+      setCurrentCards(turnedCards);
+      setTurns(0);
+    }
+
     let newCards = [...currentCards];
     for (const card of newCards) {
       if (card.id === key) {
         console.log("card.id === key");
         card.turned = true;
+        setTurns(turns => turns + 1);
+        break;
       }
     }
 
@@ -58,27 +52,20 @@ const App = () => {
       setCurrentCards(cards);
   };
 
-  /*
-  on generating shuffled cards:
-    cards all show cover
-    for each card:
-      on click:
-        change state turned to true
-  */
-
-  
   return (
     <div className="App">
       <h1 className="memory-game-headline">Memory Game</h1>
       <button 
         className="new-game-btn"
-        onClick={generateShuffledCards}>New Game</button>
+        onClick={generateShuffledCards}
+      >New Game</button>
       <div className="memory-board">
         {
           currentCards.map(card =>
             <Card 
               card={card}
               handleCardClick={handleCardClick}
+              key={card.id}
             />
           )
         }
