@@ -88,6 +88,9 @@ const App = () => {
       });
 
     setCurrentCards(cards);
+    setPoints(0);
+    setTurns(0);
+    setPairsFound([]);
   };
 
   return (
