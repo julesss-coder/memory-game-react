@@ -1,6 +1,8 @@
 # Memory Game
 
-A simple memory game with React.
+A simple memory game with React. 
+
+Try it here: https://65c3931c56e21a35c876ca50--lively-crumble-824603.netlify.app/ 
 
 The images are taken from NetNinja's course "Build websites with React and Firebase".
 
